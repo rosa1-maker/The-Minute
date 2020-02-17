@@ -1,0 +1,31 @@
+{% macro displayCategoryList(category_list) %}
+{% for category in category_list%}
+<a href="/category/{{category.id}}">
+<div class="container" id="item">
+    <p>{{category.name}}</p>
+</div></a>
+{%endfor%}
+{%endmacro %}
+
+{% macro displayPitches(pitch_list) %}
+  {% for  pitches in pitch_list%}
+  <div class="col-7">
+      <div class="fine">
+          <div class="row">
+              <div class="col-6">
+                  <p> Posted on:{{pitches.date_posted.strftime('%Y%m%d || %r' )}}</p>
+                  <a href="/pitch{{pitches.id}}"><h4>Leave a comment</h4></a>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endfor%}
+
+{% endmacro%}
+
+{%macro displaySpecificPitch(specific_pitch_list) %}
+{%for comment in specific_pitch_list %}
+<div class="col-12">
+    <hr>{{comment.comment_id}}
+</div>
+{%endmacro%}

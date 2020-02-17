@@ -5,7 +5,7 @@ from model_user import User
 from model_comment import Comment
 
 
-app = create_app('/')
+app = create_app()
 
 manager = Manager(app)
 manager.add_command('server', Server)
