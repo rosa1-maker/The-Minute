@@ -26,7 +26,7 @@ def new_pitch(id):
 
     if categories is None:
         abort(404)
-
+                                                                                                                                                                                            
 
 
 
