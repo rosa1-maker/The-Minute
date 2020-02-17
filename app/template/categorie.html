@@ -1,0 +1,16 @@
+{ % extends 'base.html'%} {% import 'macros.html' as macro%}
+
+{% block content%}
+<h3 class="categ">{{category.name|upper}}PITCH</h3>
+<hr>
+{% if pitches %}
+
+{{macro.displayPitches(pitches)}}
+
+{%else%}
+<div class="fine">
+    <h3> SORRY NO PITCH AVAILABLE</h3>
+</div>
+{% endif%}
+{% endblock%}
+{% endblock%}
