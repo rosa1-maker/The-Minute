@@ -71,3 +71,16 @@ class Pitches(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     category_id = db.Column(db.Integer, db.ForeignKey("pitch_categories.id"))
     comment = db.relationship("Comments", backref="pitches", lazy="dynamic")
+    
+
+    def save_pitch(self):
+        '''
+        Function to save a pitch
+        '''
+        db.session.add(self)
+        db.session.commit()
+    
+    @classmethod
+    def clear_pitches(cls):
+        """Function which clears all the pitches in a particular category"""
+        Pitches.all_pitches.clear()
