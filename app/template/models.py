@@ -58,3 +58,16 @@ class PitchesCategory(db.Model):
         categories = PitchCategory.query.all()
         return categories   
 
+class Pitches(db.Model):
+    '''
+    This class will hokd all instances of the pitches in the different categories
+    '''
+    all_poitches = []
+    __tablename__
+
+    id = db.Column(db.Integer, primary_key=True)
+    actual_pitch = db.Column(db.String)
+    date_posted = db.Column(db.DateTime, default=datetime.now)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    category_id = db.Column(db.Integer, db.ForeignKey("pitch_categories.id"))
+    comment = db.relationship("Comments", backref="pitches", lazy="dynamic")
