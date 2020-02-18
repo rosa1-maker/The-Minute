@@ -11,5 +11,13 @@ class Config:
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     SUBJECT_PREFIX =  'PITCH'
     SENDER_EMAIL = 'teresawanjiku2000@gmail.com'
+class ProdConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
-   
+class DevConfig(Config):
+    DEBUG = True
+
+config_options = {
+    'development':DevConfig,
+    'production':ProdConfig
+}   
