@@ -34,7 +34,7 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return 'User{self.username}'
 
-class PitchesCategory(db,Model):
+class PitchesCategory(db.Model):
     '''
     this class defines a pitch per category
     '''
@@ -42,5 +42,19 @@ class PitchesCategory(db,Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     description = db.Column(db.String(255))
+    
+    def save_category(self):
+        '''
+        Function that saves a category
+        '''
+        db.session.add(self)
+        db.session.commit()
 
+    @classmethod
+    def get_categories(cls):
+        '''
+        Function that returns all the data from the categories after being queried
+        '''
+        categories = PitchCategory.query.all()
+        return categories   
 
