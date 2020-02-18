@@ -84,3 +84,11 @@ class Pitches(db.Model):
     def clear_pitches(cls):
         """Function which clears all the pitches in a particular category"""
         Pitches.all_pitches.clear()
+
+    @classmethod
+    def get_pitches(cls,id):
+        '''
+        this function will get a pitch wjen requested with the date it was posted
+        '''
+        pitches = Pitches.query.order_by(Pitches.date_posted.desc()).filter_by(category_id=id).all()
+        return pitches
