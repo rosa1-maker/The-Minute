@@ -3,7 +3,7 @@ import os
 
 class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringaschool:Access@localhost/pitch'
-    SECRET_KEY = os.environ.get("SECREY_KEY")
+    SECRET_KEY = ("SECREY_KEY")
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True

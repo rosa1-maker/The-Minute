@@ -1,13 +1,8 @@
-from . import db
+from . import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from flask_login import LoginManager
+# from flask_login import LoginManager
 from datetime import datetime
-
-
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.query.get(init(user_id))
 
 
 class User(UserMixin, db.Model):
@@ -20,7 +15,6 @@ class User(UserMixin, db.Model):
     profile_pic_path = db.Column(db.String())
     password_hash = db.Column(db.String(255))
     pitches = db.relationship("Pitches", backref="user", lazy="dynamic")
-    
 
     @property
     def password(self):
@@ -54,12 +48,11 @@ class PitchesCategory(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_categories(cls):
+    def get_categories(id):
         '''
         Function that returns all the data from the categories after being queried
         '''
-        categories = PitchCategory.query.all()
+        categories = PitchesCategory.query.all()
         return categories
 
 
@@ -73,8 +66,8 @@ class Pitches(db.Model):
     actual_pitch = db.Column(db.String)
     date_posted = db.Column(db.DateTime, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    pitches_category_id = db.Column(db.Integer, db.ForeignKey("pitch_categories.id"))
-   
+    pitches_category_id = db.Column(
+        db.Integer, db.ForeignKey("pitch_categories.id"))
 
     def save_pitch(self):
         '''
@@ -96,3 +89,8 @@ class Pitches(db.Model):
         pitches = Pitches.query.order_by(
             Pitches.date_posted.desc()).filter_by(category_id=id).all()
         return pitches
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))

@@ -1,11 +1,16 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
 {% block styles%}
-    {{supper()}}
+    {{super()}}
     {% endblock%}
+<html>
+    <head></head>
+    <body>
 {% block content%}    
 <div class="w3-siidebar w3-light blue w3 bar-block" id="barside">
     <div class="fine">Choose Category Below</div>
     {{ macro.displyCategoryList(Category)}}
 </div>
 {% endblock%}
+</body>
+</html>
