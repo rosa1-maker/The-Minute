@@ -1,8 +1,7 @@
 from flask_login import login_user, logout_user, login_required
-from ..email import mail_message
+from flask_mail import Mail
 from flask import render_template, redirect, url_for, flash
 from . import authenticate
-from model_user import user
 from .forms import RegistrationForm, LoginForm
 from .. import db
 
@@ -11,7 +10,7 @@ def login():
     login_form= LoginForm()
     if login_form.validate_on_submit():
         user = User.query.filter_by(email=login_form.email.data).first()
-        if user is ! None and user.verify_paassword(login_form.password.data):
+        if user is not None and user.verify_paassword(login_form.password.data):
             login_user(user, login_form.remember.data)
             return redirect(url_for('min.index'))
 
@@ -20,7 +19,7 @@ def login():
 
 @authenticate.route('/register', methods=['GET', 'POST'])
 def register():
-    form= RegistrationForm():
+    form= RegistrationForm()
     if form.validate_on_submit():
         user = User(email=form.email.data, username=form.username.data, password=form.password.data)
         db.session.add(user)
