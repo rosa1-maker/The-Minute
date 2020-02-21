@@ -19,3 +19,15 @@ class PitchForm(FlaskForm):
                                    ('jobs', 'jobs')],
                           validators=[Required()])
     submit = SubmitField('Submit')
+
+class CommentForm(FlaskForm):
+    title = StringField('Title', validators=[Required()])
+    comment = TextAreaField('Comment', validators=[Required()])
+    submit = SubmitField('Submit')
+
+
+class Vote(FlaskForm):
+    rating = RadioField('Do you like this Pitch? Upvote or Downvote it',
+                        choices=[('upvote', 'upvote'),
+                                 ('downvote', 'downvote')],
+                        validators=[Required()])
