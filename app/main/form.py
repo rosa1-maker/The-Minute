@@ -1,7 +1,8 @@
 from flask import Flask
-from wtforms import  SubmitField,TextAreaField
+from wtforms import  SubmitField,TextAreaField, StringField, RadioField
 from wtforms.validators import Required, Email,EqualTo
 from app.models import User
+from flask_wtf import FlaskForm
 
 
 
