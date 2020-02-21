@@ -66,7 +66,7 @@ class Pitches(db.Model):
     actual_pitch = db.Column(db.String)
     date_posted = db.Column(db.DateTime, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    pitches_category_id = db.Column(db.Integer, db.ForeignKey("pitch_categories.id"))
+    pitches_category = db.Column(db.Integer, db.ForeignKey("pitch_categories.id"))
 
     def save_pitch(self):
         '''

@@ -11,7 +11,7 @@ def index():
     """
     A views root page funcction that returns index page and the various pitch categories
     """
-    # pitches = pitches.query.all()
+    # pitch = Pitch.query.all()
 
     return render_template('index.html')
 
@@ -21,9 +21,9 @@ def business():
     """
     Function that renders the business category pitches and its content
     """
-    business_pitch = Pitch.query.filter_by(category='business').all()
+    # business_pitch = Pitches.query.all()
 
-    return render_template('business.html', business=business_pitch)
+    return render_template('business.html')
 
 
 @main.route('/jobs')
