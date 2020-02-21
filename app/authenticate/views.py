@@ -2,12 +2,12 @@ from .forms import RegistrationForm, LoginForm, Form
 from .. import db
 from flask_login import login_user, logout_user, login_required
 from flask_mail import Mail
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash , request
 from . import authenticate
 from app.models import User, PitchesCategory, Pitches
 
 
-@auth.route('/login', methods=['GET', 'POST'])
+@authenticate.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
@@ -21,7 +21,7 @@ def login():
     return render_template('auth/login.html', login_form=login_form, title=title)
 
 
-@auth.route('/register', methods=["GET", "POST"])
+@authenticate.route('/register', methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
 
@@ -31,14 +31,14 @@ def register():
                     password=form.password.data)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('authenticate.login'))
     title = "New Account"
     return render_template('auth/register.html',
                            registration_form=form,
                            title=title)
 
 
-@auth.route('/logout')
+@authenticate.route('/logout')
 @login_required
 def logout():
     logout_user()

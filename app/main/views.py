@@ -3,7 +3,7 @@ from . import main
 from flask_login import login_required
 from app.models import User, PitchesCategory, Pitches
 from .. import db
-from .forms import PitchForm, CommentForm, Vote, ProfileUpdate
+from app.main.form import PitchForm, CommentForm, Vote, ProfileUpdate
 
 
 @main.route('/')
@@ -11,9 +11,9 @@ def index():
     """
     A views root page funcction that returns index page and the various pitch categories
     """
-    pitches = Pitch.queery.all()
+    # pitches = pitches.query.all()
 
-    return render_template('index.html', categories=categories)
+    return render_template('index.html')
 
 
 @main.route('/business')
