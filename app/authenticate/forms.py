@@ -5,13 +5,12 @@ from wtforms.validators import Required, Email, EqualTo
 
 
 class RegistrationForm(FlaskForm):
-    Email = StringField('Email')
-    username = StringField('Username', validators=[Required()])
-    password = PasswordField('password', validators=[Required()])
-
-    submit = SubmitField('Signup')
-    confirm = PasswordField('Repeat Password')
-    accept_tos = BooleanField('I accept the TOS')
+    email = StringField('Email Address', validators=[Required(), Email()])
+    username = StringField('Enter your username', validators=[Required()])
+    password = PasswordField('Password', validators=[Required(), EqualTo(
+        'password2', message='Make sure passwords match')])
+    password2 = PasswordField('Confirm Password', validators=[Required()])
+    submit = SubmitField('Sign Up')
 
     def validate_email(self, data_field):
         if User.query.filter_by(email=data_field.data).first():
@@ -24,16 +23,7 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    Username = StringField('username', validators=[Required()])
-    password = PasswordField('password', validators=[Required()])
-
-    submit = SubmitField('login')
-    confirm = PasswordField('Repeat Password')
-    accept_tos = BooleanField('I accept the TOS')
-
-
-class Comment(FlaskForm):
-
-    title = StringField('The Pitch', validators=[Required()])
-    Comment = TextAreaField('Pitch Comment', validators=[Required()])
-    submit = SubmitField('Submit')
+    email = StringField('Email Address', validators=[Required(), Email()])
+    password = PasswordField('Password', validators=[Required()])
+    remember = BooleanField('Remember me')
+    submit = SubmitField('Sign In')
