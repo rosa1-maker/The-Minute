@@ -9,6 +9,8 @@
 {% block content%}    
 <div class="w3-siidebar w3-light blue w3 bar-block" id="barside">
     <div class="fine">Choose Category Below</div>
+    <p>Do you want to write a pitch. Sign up <a href="authenticate/login">here</a></p>
+  <p>Already signed in? Write a pitch <a href="authenticate/new">here</a>.</p>
     {{ macro.displyPitchList(Pitches)}}
 </div>
 {% endblock%}
